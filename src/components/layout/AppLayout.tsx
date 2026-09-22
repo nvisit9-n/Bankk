@@ -19,6 +19,7 @@ import { LeaderboardSection } from '../leaderboard/LeaderboardSection';
 import { AboutUsScreen } from '../about/AboutUsScreen';
 import { AdminAnalyticsDashboard } from '../admin/AdminAnalyticsDashboard';
 import { DeepResearchEngine } from '../ai/DeepResearchEngine';
+import { FlashcardsScreen } from '../flashcards/FlashcardsScreen';
 import { Footer } from './Footer';
 
 // Readers & Modals
@@ -82,6 +83,7 @@ export const AppLayout: React.FC<AppLayoutProps> = () => {
           {activeTab === 'home' && <HomeScreen />}
           {activeTab === 'courses' && <CoursesScreen />}
           {activeTab === 'quiz' && <PublicEnterprisesScreen />}
+          {activeTab === 'flashcards' && <FlashcardsScreen />}
           {activeTab === 'video-lectures' && <VideoLecturesScreen />}
           {activeTab === 'current-affairs' && <CurrentAffairsScreen />}
           {activeTab === 'free-notes' && <FreeNotesScreen />}

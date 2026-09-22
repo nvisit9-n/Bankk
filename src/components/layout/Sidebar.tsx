@@ -333,6 +333,7 @@ export const Sidebar: React.FC = () => {
   ];
 
   const resourceNavItems: { tab: NavigationTab; label: string; icon: React.ComponentType<{ className?: string }>; badge?: string | number; badgeColor?: string }[] = [
+    { tab: 'flashcards', label: 'स्मार्ट फ्ल्यासकार्ड (Flashcards)', icon: Layers, badge: 'NEW', badgeColor: 'bg-emerald-600' },
     { tab: 'deep-research', label: 'Deep Research AI (रिसर्च)', icon: Bot, badge: 'PRO', badgeColor: 'bg-emerald-600' },
     { tab: 'leaderboard', label: 'वरियता (Leaderboard)', icon: Trophy, badge: 'Ranking', badgeColor: 'bg-amber-500' },
     { tab: 'video-lectures', label: 'भिडियो कक्षाहरू (Videos)', icon: Youtube, badge: 'HD', badgeColor: 'bg-red-600' },

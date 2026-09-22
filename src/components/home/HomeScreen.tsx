@@ -46,6 +46,7 @@ import { MasterSequenceDashboard } from './MasterSequenceDashboard';
 import { CategoryProgressTracker } from './CategoryProgressTracker';
 import { DailyQuizCard } from './DailyQuizCard';
 import { PomodoroTimer } from './PomodoroTimer';
+import { FlashcardDashboardCard } from './FlashcardDashboardCard';
 
 export const HomeScreen: React.FC = () => {
   const { 
@@ -175,6 +176,9 @@ export const HomeScreen: React.FC = () => {
 
       {/* Pomodoro Study Timer: Focus & Break Intervals */}
       <PomodoroTimer />
+
+      {/* Interactive Flashcard Memorizer: Legal Definitions & Banking Terms */}
+      <FlashcardDashboardCard />
 
       {/* STRICT NUMBERED SEQUENCE 1 TO 4 (INTEGRATED PRETEST & WRITTEN PREPARATION) */}
       <MasterSequenceDashboard />

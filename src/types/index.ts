@@ -2,6 +2,7 @@ export type NavigationTab =
   | 'home' 
   | 'courses' 
   | 'quiz' 
+  | 'flashcards'
   | 'current-affairs' 
   | 'profile' 
   | 'leaderboard'
@@ -13,6 +14,25 @@ export type NavigationTab =
   | 'deep-research'
   | 'about'
   | 'admin';
+
+export type FlashcardCategory = 'legal' | 'banking' | 'economics' | 'risk_aml';
+
+export interface FlashcardItem {
+  id: string;
+  category: FlashcardCategory;
+  categoryLabelNe: string;
+  categoryLabelEn: string;
+  termNe: string;
+  termEn: string;
+  actRef?: string;
+  sectionRef?: string;
+  definitionNe: string;
+  definitionEn?: string;
+  keyPointsNe: string[];
+  examSignificanceNe?: string;
+  memoryMnemonicNe?: string;
+  difficulty?: 'Easy' | 'Medium' | 'Hard';
+}
 
 export type QuizSubCategory = 'sangathit' | 'banking' | 'loksewa';
 
