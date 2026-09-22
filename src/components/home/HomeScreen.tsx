@@ -47,6 +47,7 @@ import { CategoryProgressTracker } from './CategoryProgressTracker';
 import { DailyQuizCard } from './DailyQuizCard';
 import { PomodoroTimer } from './PomodoroTimer';
 import { FlashcardDashboardCard } from './FlashcardDashboardCard';
+import { ExamRoadmap } from './ExamRoadmap';
 
 export const HomeScreen: React.FC = () => {
   const { 
@@ -167,6 +168,9 @@ export const HomeScreen: React.FC = () => {
         onStartChallenge={handleStartTodayChallenge}
         onOpenNotes={() => setActiveTab('free-notes')}
       />
+
+      {/* NEW: Exam Syllabus Roadmap with 5-Phase Stepper UI (Banking, Loksewa, NRB) */}
+      <ExamRoadmap />
 
       {/* Visual Progress Tracker across Banking, Loksewa, NRB */}
       <CategoryProgressTracker />
