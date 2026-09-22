@@ -241,13 +241,13 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
             <span className="text-sm sm:text-base font-bold text-slate-700 dark:text-slate-200">
               / {maxScore} अङ्क
             </span>
-            <span className="ml-2 text-xs font-bold px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 text-slate-800 dark:text-[#F1F5F9] border border-slate-300 dark:border-slate-700 shadow-xs">
+            <span className="ml-2 text-xs font-bold px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 text-slate-800 dark:text-[#FFFFFF] border border-slate-300 dark:border-slate-700 shadow-xs">
               {percentage}% अंक
             </span>
           </div>
 
           <div className="flex-1 max-w-xs sm:ml-4">
-            <div className="flex items-center justify-between text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
+            <div className="flex items-center justify-between text-[11px] font-bold text-slate-700 dark:text-[#F8FAFC] mb-1">
               <span>अङ्क स्तर</span>
               <span className="text-amber-600 dark:text-amber-300 font-extrabold">{score >= 8 ? 'Ranker Zone' : score >= 6 ? 'Passing Zone' : 'Needs Work'}</span>
             </div>
@@ -266,7 +266,7 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
 
         {/* OCR Summary if available */}
         {data.ocrSummary && (
-          <div className="mt-3 p-3 rounded-xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-xs text-slate-800 dark:text-[#F1F5F9] leading-relaxed shadow-xs">
+          <div className="mt-3 p-3 rounded-xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-xs text-slate-800 dark:text-[#FFFFFF] leading-relaxed shadow-xs">
             <span className="font-bold text-amber-700 dark:text-[#FBBF24] mr-1.5">📝 हस्तलिखित सारांश:</span>
             <span className="font-medium">{data.ocrSummary}</span>
           </div>
@@ -279,7 +279,7 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
           <button
             type="button"
             onClick={() => setShowFullBreakdown(prev => !prev)}
-            className="w-full flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-amber-600 dark:hover:text-white cursor-pointer"
+            className="w-full flex items-center justify-between text-xs font-bold text-slate-800 dark:text-[#FFFFFF] hover:text-amber-600 dark:hover:text-white cursor-pointer"
           >
             <span className="flex items-center gap-1.5 text-amber-700 dark:text-[#FBBF24] font-extrabold">
               <BookOpen className="w-4 h-4 text-[#38BDF8]" />
@@ -292,7 +292,7 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
             <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
               {data.marksBreakdown.map((item, idx) => (
                 <div key={idx} className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
-                  <span className="text-slate-800 dark:text-[#F1F5F9] font-medium truncate pr-2">{item.label}</span>
+                  <span className="text-slate-800 dark:text-[#FFFFFF] font-medium truncate pr-2">{item.label}</span>
                   <span className="font-black text-amber-600 dark:text-[#38BDF8] shrink-0 font-mono">
                     {item.marks} / {item.max}
                   </span>
@@ -312,7 +312,7 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
             <CheckCircle2 className="w-4 h-4 text-[#4ADE80] shrink-0" />
             <span>सबल पक्षहरू (Key Strengths)</span>
           </div>
-          <ul className="space-y-2 text-xs text-slate-800 dark:text-[#F1F5F9]">
+          <ul className="space-y-2 text-xs text-slate-800 dark:text-[#FFFFFF]">
             {data.strengths?.map((str, idx) => (
               <li key={idx} className="flex items-start gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#4ADE80] shrink-0 mt-1" />
@@ -328,7 +328,7 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
             <AlertTriangle className="w-4 h-4 text-[#FB7185] shrink-0" />
             <span>कमजोरी तथा छुटेका बुँदाहरू (Missed Points)</span>
           </div>
-          <ul className="space-y-2 text-xs text-slate-800 dark:text-[#F1F5F9]">
+          <ul className="space-y-2 text-xs text-slate-800 dark:text-[#FFFFFF]">
             {data.weaknesses?.map((w, idx) => (
               <li key={idx} className="flex items-start gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#FB7185] shrink-0 mt-1" />
@@ -346,11 +346,11 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
             <Lightbulb className="w-4 h-4 text-[#38BDF8] shrink-0" />
             <span>परीक्षकको व्यावहारिक सुझाव (९+ अङ्क ल्याउने सूत्र)</span>
           </div>
-          <div className="space-y-2 text-xs text-slate-800 dark:text-[#F1F5F9]">
+          <div className="space-y-2 text-xs text-slate-800 dark:text-[#FFFFFF]">
             {data.suggestions.map((sug, idx) => (
               <div key={idx} className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex items-start gap-2.5 shadow-xs">
                 <span className="text-[#38BDF8] font-black shrink-0">{idx + 1}.</span>
-                <span className="leading-relaxed font-medium text-slate-900 dark:text-[#F1F5F9]">{sug}</span>
+                <span className="leading-relaxed font-medium text-slate-900 dark:text-[#FFFFFF]">{sug}</span>
               </div>
             ))}
           </div>

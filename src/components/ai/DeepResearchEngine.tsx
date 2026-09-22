@@ -25,6 +25,7 @@ import {
 import ReactMarkdown from 'react-markdown';
 import { MarkdownRenderer } from '../common/MarkdownRenderer';
 import { useApp } from '../../context/AppContext';
+import { cleanNepaliSpeechTranscript, appendSpeechTranscriptSafely } from '../../utils/speechUtils';
 
 export interface UploadedSheetImage {
   id: string;
@@ -230,15 +231,17 @@ export const DeepResearchEngine: React.FC<DeepResearchEngineProps> = ({
         let interimSegment = '';
         for (let i = 0; i < event.results.length; ++i) {
           const res = event.results[i];
+          const transcript = res[0]?.transcript || '';
           if (res.isFinal) {
-            finalSegment += res[0].transcript + ' ';
+            finalSegment += transcript + ' ';
           } else {
-            interimSegment += res[0].transcript;
+            interimSegment = transcript;
           }
         }
-        const accumulated = (finalSegment + interimSegment).trim();
-        speechBufferRef.current = accumulated;
-        setInterimSpeechBuffer(accumulated);
+        const rawAccumulated = (finalSegment + interimSegment).trim();
+        const cleanAccumulated = cleanNepaliSpeechTranscript(rawAccumulated);
+        speechBufferRef.current = cleanAccumulated;
+        setInterimSpeechBuffer(cleanAccumulated);
       };
 
       recognition.onerror = (event: any) => {
@@ -253,17 +256,9 @@ export const DeepResearchEngine: React.FC<DeepResearchEngineProps> = ({
 
         if (!sessionFlushedRef.current) {
           sessionFlushedRef.current = true;
-          const cleanBuffer = speechBufferRef.current.trim();
+          const cleanBuffer = cleanNepaliSpeechTranscript(speechBufferRef.current);
           if (cleanBuffer) {
-            setInputText(prev => {
-              const prevTrimmed = (prev || '').trim();
-              if (!prevTrimmed) return cleanBuffer;
-              // Prevent duplicating if already appended or matches the end
-              if (prevTrimmed.endsWith(cleanBuffer) || prevTrimmed === cleanBuffer) {
-                return prevTrimmed;
-              }
-              return `${prevTrimmed} ${cleanBuffer}`;
-            });
+            setInputText(prev => appendSpeechTranscriptSafely(prev, cleanBuffer));
           }
           speechBufferRef.current = '';
         }
@@ -767,7 +762,7 @@ export const DeepResearchEngine: React.FC<DeepResearchEngineProps> = ({
                             className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-bold text-xs transition-all cursor-pointer ${
                               isSpeaking
                                 ? 'bg-red-500 text-white animate-pulse'
-                                : 'bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 text-slate-800 dark:text-[#F1F5F9] border border-slate-200 dark:border-slate-700'
+                                : 'bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 text-slate-800 dark:text-[#FFFFFF] border border-slate-200 dark:border-slate-700'
                             }`}
                           >
                             {isSpeaking ? (
@@ -786,7 +781,7 @@ export const DeepResearchEngine: React.FC<DeepResearchEngineProps> = ({
                           <button
                             type="button"
                             onClick={() => handleCopy(msg.id, msg.text)}
-                            className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-[#F1F5F9] border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 text-xs transition font-semibold cursor-pointer"
+                            className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-[#FFFFFF] border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 text-xs transition font-semibold cursor-pointer"
                           >
                             {copiedId === msg.id ? (
                               <>

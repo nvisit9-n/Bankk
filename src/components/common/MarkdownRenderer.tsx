@@ -103,7 +103,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
 
           // Table data cell with high contrast
           td: ({ children, ...props }) => (
-            <td className="p-3.5 sm:p-4 text-xs sm:text-sm text-slate-900 dark:text-[#F1F5F9] leading-relaxed border-r border-slate-200/60 dark:border-slate-800 last:border-r-0" {...props}>
+            <td className="p-3.5 sm:p-4 text-xs sm:text-sm text-slate-900 dark:text-[#FFFFFF] leading-relaxed border-r border-slate-200/60 dark:border-slate-800 last:border-r-0" {...props}>
               {children}
             </td>
           ),
@@ -189,9 +189,9 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
               textContent.startsWith('Note:')
             ) {
               return (
-                <div className="my-4 p-4 rounded-xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-500/50 text-slate-900 dark:text-[#F1F5F9] text-xs sm:text-sm leading-relaxed flex items-start gap-3 shadow-xs">
+                <div className="my-4 p-4 rounded-xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-500/50 text-slate-900 dark:text-[#FFFFFF] text-xs sm:text-sm leading-relaxed flex items-start gap-3 shadow-xs">
                   <Sparkles className="w-5 h-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
-                  <div className="flex-1 font-sans text-slate-900 dark:text-[#F1F5F9] font-medium leading-relaxed">{children}</div>
+                  <div className="flex-1 font-sans text-slate-900 dark:text-[#FFFFFF] font-medium leading-relaxed">{children}</div>
                 </div>
               );
             }
@@ -243,7 +243,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
               return (
                 <div className="my-3 p-3.5 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/40 border-l-4 border-[#4ADE80] text-slate-900 dark:text-[#FFFFFF] text-xs sm:text-sm leading-relaxed">
                   <div className="font-bold text-emerald-800 dark:text-[#4ADE80] mb-0.5">उत्तर तथा निष्कर्ष:</div>
-                  <div className="text-slate-900 dark:text-[#F1F5F9] leading-relaxed">{children}</div>
+                  <div className="text-slate-900 dark:text-[#FFFFFF] leading-relaxed">{children}</div>
                 </div>
               );
             }
@@ -256,7 +256,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
                     <CheckCircle className="w-4 h-4 text-[#4ADE80] shrink-0" />
                     <span>सबल पक्षहरू (Strengths):</span>
                   </div>
-                  <div className="text-slate-900 dark:text-[#F1F5F9] leading-relaxed">{children}</div>
+                  <div className="text-slate-900 dark:text-[#FFFFFF] leading-relaxed">{children}</div>
                 </div>
               );
             }
@@ -265,14 +265,14 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
               return (
                 <div className="my-3 p-3.5 rounded-xl bg-rose-50/80 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-500/40 text-slate-900 dark:text-[#FFFFFF] text-xs sm:text-sm leading-relaxed">
                   <div className="font-bold text-rose-700 dark:text-[#FB7185] mb-1">⚠️ कमजोरी वा सुधार गर्नुपर्ने पक्षहरू (Weaknesses):</div>
-                  <div className="text-slate-900 dark:text-[#F1F5F9] leading-relaxed">{children}</div>
+                  <div className="text-slate-900 dark:text-[#FFFFFF] leading-relaxed">{children}</div>
                 </div>
               );
             }
 
-            // Standard paragraph: High contrast pure dark in light mode, pure #F1F5F9 in dark mode
+            // Standard paragraph: High contrast pure dark in light mode, pure #FFFFFF in dark mode
             return (
-              <p className="text-sm sm:text-base leading-relaxed text-slate-900 dark:text-[#F1F5F9] my-2.5 font-sans" {...props}>
+              <p className="text-sm sm:text-base leading-relaxed text-slate-900 dark:text-[#FFFFFF] my-2.5 font-sans" {...props}>
                 {children}
               </p>
             );
@@ -280,28 +280,28 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
 
           // Blockquote as light-shaded callout box (NRB IT guidelines, legal clauses, acts, formulas)
           blockquote: ({ children, ...props }) => (
-            <blockquote className="bg-slate-100 border-l-4 border-[#38BDF8] dark:bg-slate-900/90 dark:border-[#38BDF8] p-4 rounded-r-xl my-3 text-slate-900 dark:text-[#F1F5F9] text-xs sm:text-sm leading-relaxed shadow-xs" {...props}>
+            <blockquote className="bg-slate-100 border-l-4 border-[#38BDF8] dark:bg-slate-900/90 dark:border-[#38BDF8] p-4 rounded-r-xl my-3 text-slate-900 dark:text-[#FFFFFF] text-xs sm:text-sm leading-relaxed shadow-xs" {...props}>
               {children}
             </blockquote>
           ),
 
           // Lists with high contrast bullet points
           ul: ({ children, ...props }) => (
-            <ul className="space-y-2.5 my-3 pl-1 text-slate-900 dark:text-[#F1F5F9]" {...props}>
+            <ul className="space-y-2.5 my-3 pl-1 text-slate-900 dark:text-[#FFFFFF]" {...props}>
               {children}
             </ul>
           ),
 
           ol: ({ children, ...props }) => (
-            <ol className="list-decimal space-y-2.5 my-3 pl-5 text-sm sm:text-base text-slate-900 dark:text-[#F1F5F9]" {...props}>
+            <ol className="list-decimal space-y-2.5 my-3 pl-5 text-sm sm:text-base text-slate-900 dark:text-[#FFFFFF]" {...props}>
               {children}
             </ol>
           ),
 
           li: ({ children, ...props }) => (
-            <li className="text-sm sm:text-base text-slate-900 dark:text-[#F1F5F9] leading-relaxed flex items-start gap-2.5" {...props}>
-              <span className="w-2 h-2 rounded-full bg-[#4ADE80] shadow-[0_0_6px_rgba(74,222,128,0.6)] shrink-0 mt-2" />
-              <div className="flex-1 text-slate-900 dark:text-[#F1F5F9]">{children}</div>
+            <li className="text-sm sm:text-base text-slate-900 dark:text-[#FFFFFF] leading-relaxed flex items-start gap-2.5" {...props}>
+              <span className="w-2 h-2 rounded-full bg-[#4ADE80] shadow-[0_0_8px_rgba(74,222,128,0.8)] shrink-0 mt-2" />
+              <div className="flex-1 text-slate-900 dark:text-[#FFFFFF]">{children}</div>
             </li>
           ),
 
@@ -312,7 +312,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
           ),
 
           em: ({ children, ...props }) => (
-            <em className="italic text-slate-900 dark:text-[#F1F5F9]" {...props}>
+            <em className="italic text-slate-900 dark:text-[#F8FAFC]" {...props}>
               {children}
             </em>
           ),

@@ -46,6 +46,7 @@ import {
 } from '../../services/geminiClientService';
 import { FirebaseAuthService } from '../../services/firebaseAuthService';
 import { EvaluationCard } from '../ai/EvaluationCard';
+import { cleanNepaliSpeechTranscript, appendSpeechTranscriptSafely } from '../../utils/speechUtils';
 
 interface AttachedFile {
   type: 'image' | 'pdf';
@@ -319,16 +320,18 @@ export const AiAssistantModal: React.FC = () => {
           let interimChunk = '';
           for (let i = 0; i < event.results.length; ++i) {
             const item = event.results[i];
+            const transcript = item[0]?.transcript || '';
             if (item.isFinal) {
-              finalChunk += item[0].transcript + ' ';
+              finalChunk += transcript + ' ';
             } else {
-              interimChunk += item[0].transcript;
+              interimChunk = transcript;
             }
           }
-          const accumulated = (finalChunk + interimChunk).trim();
-          speechBufferRef.current = accumulated;
-          setInterimSpeechBuffer(accumulated);
-          setSpeechNotice(`🔴 सुन्दैछ: "${accumulated}"`);
+          const rawAccumulated = (finalChunk + interimChunk).trim();
+          const cleanAccumulated = cleanNepaliSpeechTranscript(rawAccumulated);
+          speechBufferRef.current = cleanAccumulated;
+          setInterimSpeechBuffer(cleanAccumulated);
+          setSpeechNotice(`🔴 सुन्दैछ: "${cleanAccumulated}"`);
         };
 
         recognition.onerror = (event: any) => {
@@ -346,17 +349,9 @@ export const AiAssistantModal: React.FC = () => {
 
           if (!sessionFlushedRef.current) {
             sessionFlushedRef.current = true;
-            const finalResult = speechBufferRef.current.trim();
+            const finalResult = cleanNepaliSpeechTranscript(speechBufferRef.current);
             if (finalResult) {
-              setInputQuery(prev => {
-                const prevTrimmed = (prev || '').trim();
-                if (!prevTrimmed) return finalResult;
-                // Prevent duplicate repetition of identical trailing fragments
-                if (prevTrimmed.endsWith(finalResult) || prevTrimmed === finalResult) {
-                  return prevTrimmed;
-                }
-                return `${prevTrimmed} ${finalResult}`;
-              });
+              setInputQuery(prev => appendSpeechTranscriptSafely(prev, finalResult));
               setSpeechNotice('✅ आवाज रूपान्तरण भयो');
               setTimeout(() => setSpeechNotice(null), 2500);
             } else {
@@ -411,21 +406,13 @@ export const AiAssistantModal: React.FC = () => {
 
         try {
           const transcribedText = await transcribeAudioWithGemini(audioBlob, speechLanguage);
-          if (!sessionFlushedRef.current && transcribedText && transcribedText.trim()) {
+          const cleanText = cleanNepaliSpeechTranscript(transcribedText || '');
+          if (!sessionFlushedRef.current && cleanText) {
             sessionFlushedRef.current = true;
-            const cleanText = transcribedText.trim();
-            // Single flush on session-end
-            setInputQuery(prev => {
-              const prevTrimmed = (prev || '').trim();
-              if (!prevTrimmed) return cleanText;
-              if (prevTrimmed.endsWith(cleanText) || prevTrimmed === cleanText) {
-                return prevTrimmed;
-              }
-              return `${prevTrimmed} ${cleanText}`;
-            });
+            setInputQuery(prev => appendSpeechTranscriptSafely(prev, cleanText));
             setSpeechNotice(`✅ आवाज रूपान्तरण भयो`);
             setTimeout(() => setSpeechNotice(null), 2500);
-          } else if (!transcribedText || !transcribedText.trim()) {
+          } else if (!cleanText) {
             setSpeechNotice('आवाज स्पष्ट भएन, कृपया फेरि बोल्नुहोस्।');
             setTimeout(() => setSpeechNotice(null), 3000);
           }
@@ -1150,7 +1137,7 @@ export const AiAssistantModal: React.FC = () => {
                               className={`flex items-center gap-1 font-bold transition cursor-pointer ${
                                 ttsState.isPlaying && ttsState.messageId === msg.id
                                   ? 'text-rose-600 dark:text-rose-400 animate-pulse'
-                                  : 'hover:text-sky-600 dark:hover:text-[#38BDF8] text-slate-700 dark:text-slate-200'
+                                  : 'hover:text-sky-600 dark:hover:text-[#38BDF8] text-slate-700 dark:text-[#FFFFFF]'
                               }`}
                               title="नेपालीमा आवाज सुन्नुहोस् (Text to Speech)"
                             >
@@ -1169,7 +1156,7 @@ export const AiAssistantModal: React.FC = () => {
 
                             <button
                               onClick={() => handleCopyText(msg.id, msg.text)}
-                              className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-white transition cursor-pointer text-slate-700 dark:text-slate-200 font-semibold"
+                              className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-white transition cursor-pointer text-slate-700 dark:text-[#FFFFFF] font-semibold"
                             >
                               {copiedId === msg.id ? <Check className="w-3.5 h-3.5 text-[#4ADE80]" /> : <Copy className="w-3.5 h-3.5 text-slate-500 dark:text-slate-300" />}
                               <span>{copiedId === msg.id ? 'कपी भयो' : 'कपी'}</span>

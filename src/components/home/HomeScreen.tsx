@@ -44,6 +44,7 @@ import { OfficialYouTubeSection } from './OfficialYouTubeSection';
 import { LevelSelectorCard } from '../levels/LevelSelectorCard';
 import { MasterSequenceDashboard } from './MasterSequenceDashboard';
 import { CategoryProgressTracker } from './CategoryProgressTracker';
+import { DailyQuizCard } from './DailyQuizCard';
 
 export const HomeScreen: React.FC = () => {
   const { 
@@ -167,6 +168,9 @@ export const HomeScreen: React.FC = () => {
 
       {/* Visual Progress Tracker across Banking, Loksewa, NRB */}
       <CategoryProgressTracker />
+
+      {/* Daily Quiz: 25 Random MCQs with Instant Score Summary */}
+      <DailyQuizCard />
 
       {/* STRICT NUMBERED SEQUENCE 1 TO 4 (INTEGRATED PRETEST & WRITTEN PREPARATION) */}
       <MasterSequenceDashboard />
