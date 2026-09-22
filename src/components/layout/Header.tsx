@@ -159,6 +159,7 @@ export const Header: React.FC = () => {
     setLanguage,
     toggleLanguage,
     t,
+    tText,
     setIsSearchOpen, 
     setIsAiModalOpen,
     setIsNotificationsOpen,
@@ -210,24 +211,24 @@ export const Header: React.FC = () => {
   // Dynamic user session bindings:
   const emailPrefix = user?.email ? user.email.split('@')[0] : '';
   const displayName = isGuest
-    ? 'अतिथि'
-    : (user?.displayName || (user?.name && user.name !== 'विद्यार्थी' ? user.name : (emailPrefix || 'परीक्षार्थी')));
+    ? tText('अतिथि', 'Guest')
+    : (user?.displayName || (user?.name && user.name !== 'विद्यार्थी' ? user.name : (emailPrefix || tText('परीक्षार्थी', 'Candidate'))));
   const userEmail = isGuest ? '' : (user?.email || '');
   const photoURL = user?.photoURL || user?.avatarUrl || (isGuest ? '/default-avatar.png' : `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=0B2046&color=fff&size=256`);
 
   const drawerNavItems: { tab: NavigationTab; label: string; icon: React.ComponentType<{ className?: string }>; badge?: string | number; badgeColor?: string }[] = [
-    { tab: 'home', label: language === 'ne' ? 'गृहपृष्ठ' : 'Home', icon: Home },
-    { tab: 'courses', label: language === 'ne' ? 'पाठ्यक्रम' : 'Syllabus & Courses', icon: BookOpen },
-    { tab: 'quiz', label: language === 'ne' ? 'संस्थान तथा संगठित संस्था' : 'Public Enterprises', icon: Building2 },
-    { tab: 'free-notes', label: language === 'ne' ? 'अध्ययन / AI नोट्स' : 'Study & AI Notes', icon: FileText },
-    { tab: 'leaderboard', label: language === 'ne' ? 'वरियता' : 'Leaderboard', icon: Trophy },
-    { tab: 'video-lectures', label: language === 'ne' ? 'भिडियो कक्षाहरू' : 'Video Lectures', icon: Youtube },
-    { tab: 'current-affairs', label: language === 'ne' ? 'समसामयिक' : 'Current Affairs', icon: Newspaper },
-    { tab: 'premium', label: language === 'ne' ? 'प्रिमियम नोट्स' : 'Premium Notes', icon: Sparkles },
-    { tab: 'purchases', label: language === 'ne' ? 'मेरो खरिद' : 'My Purchases', icon: ShoppingBag, badge: (purchases || []).length > 0 ? (purchases || []).length : undefined },
-    { tab: 'bookmarks', label: language === 'ne' ? 'बुकमार्क' : 'Bookmarks', icon: Bookmark, badge: (bookmarks || []).length > 0 ? (bookmarks || []).length : undefined },
-    { tab: 'profile', label: language === 'ne' ? 'मेरो प्रोफाइल' : 'My Profile', icon: UserIcon },
-    { tab: 'about', label: language === 'ne' ? 'हाम्रो बारेमा' : 'About Us', icon: Info }
+    { tab: 'home', label: tText('गृहपृष्ठ', 'Home'), icon: Home },
+    { tab: 'courses', label: tText('पाठ्यक्रम', 'Syllabus & Courses'), icon: BookOpen },
+    { tab: 'quiz', label: tText('संस्थान तथा संगठित संस्था', 'Public Enterprises'), icon: Building2 },
+    { tab: 'free-notes', label: tText('अध्ययन / AI नोट्स', 'Study & AI Notes'), icon: FileText },
+    { tab: 'leaderboard', label: tText('वरियता', 'Leaderboard'), icon: Trophy },
+    { tab: 'video-lectures', label: tText('भिडियो कक्षाहरू', 'Video Lectures'), icon: Youtube },
+    { tab: 'current-affairs', label: tText('समसामयिक', 'Current Affairs'), icon: Newspaper },
+    { tab: 'premium', label: tText('प्रिमियम नोट्स', 'Premium Notes'), icon: Sparkles },
+    { tab: 'purchases', label: tText('मेरो खरिद', 'My Purchases'), icon: ShoppingBag, badge: (purchases || []).length > 0 ? (purchases || []).length : undefined },
+    { tab: 'bookmarks', label: tText('बुकमार्क', 'Bookmarks'), icon: Bookmark, badge: (bookmarks || []).length > 0 ? (bookmarks || []).length : undefined },
+    { tab: 'profile', label: tText('मेरो प्रोफाइल', 'My Profile'), icon: UserIcon },
+    { tab: 'about', label: tText('हाम्रो बारेमा', 'About Us'), icon: Info }
   ];
 
   const handleDrawerNavigate = (tab: NavigationTab) => {
@@ -236,7 +237,7 @@ export const Header: React.FC = () => {
   };
 
   const handleLogout = () => {
-    if (window.confirm('के तपाईं लगआउट गर्न चाहनुहुन्छ?')) {
+    if (window.confirm(tText('के तपाईं लगआउट गर्न चाहनुहुन्छ?', 'Are you sure you want to log out?'))) {
       setIsMobileDrawerOpen(false);
       logout();
     }
@@ -266,7 +267,7 @@ export const Header: React.FC = () => {
                 type="button"
                 onClick={() => setActiveTab('home')}
                 className="md:hidden flex items-center gap-1.5 focus:outline-none cursor-pointer truncate"
-                title="Banking Tayari Nepal"
+                title={tText('बैंकिङ्ग तयारी', 'Banking Tayari Nepal')}
               >
                 <img 
                   src="/logo-icon.svg" 
@@ -274,7 +275,7 @@ export const Header: React.FC = () => {
                   className="w-7 h-7 object-contain shrink-0" 
                 />
                 <span className="text-xs font-black tracking-tight text-[#E2E8F0] truncate max-w-[100px] xs:max-w-[130px]">
-                  बैंकिङ्ग तयारी
+                  {tText('बैंकिङ्ग तयारी', 'Banking Tayari')}
                 </span>
               </button>
             </div>
@@ -287,7 +288,7 @@ export const Header: React.FC = () => {
               >
                 <div className="flex items-center gap-2.5">
                   <Search className="w-4 h-4 text-slate-400 group-hover:text-sky-400 transition" />
-                  <span className="text-[#E2E8F0] font-medium">के खोज्दै हुनुहुन्छ? (Search Notes, Quiz...)</span>
+                  <span className="text-[#E2E8F0] font-medium">{tText('के खोज्दै हुनुहुन्छ? (Search Notes, Quiz...)', 'Search Notes, Quiz, Acts, Syllabi...')}</span>
                 </div>
                 <kbd className="hidden lg:inline-block px-2 py-0.5 text-[10px] font-semibold bg-[#0F172A] border border-slate-700 rounded text-slate-400 font-mono">
                   ⌘K
@@ -301,7 +302,7 @@ export const Header: React.FC = () => {
               {/* Mobile Search Button (40px touch target) */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                aria-label="Search"
+                aria-label={tText('खोज्नुहोस्', 'Search')}
                 className="md:hidden min-h-[40px] min-w-[40px] p-2 text-slate-300 hover:text-white hover:bg-[#1E293B] rounded-xl flex items-center justify-center transition active:scale-95 shrink-0 border border-slate-700/60"
               >
                 <Search className="w-4.5 h-4.5" />
@@ -311,10 +312,10 @@ export const Header: React.FC = () => {
               <button
                 onClick={() => setIsAiModalOpen(true)}
                 className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-bold rounded-xl bg-[#1E293B] text-sky-300 border border-sky-500/40 hover:bg-sky-500/15 hover:border-sky-400 transition shrink-0 cursor-pointer"
-                title="AI Study Assistant"
+                title={tText('AI अध्ययन साथी', 'AI Study Assistant')}
               >
                 <Sparkles className="w-4 h-4 text-sky-400" />
-                <span>AI साथी</span>
+                <span>{tText('AI साथी', 'AI Study')}</span>
               </button>
 
               {/* Install PWA App Button */}
@@ -330,16 +331,16 @@ export const Header: React.FC = () => {
                     ? 'bg-[#1E293B] text-sky-300 border-sky-500/60'
                     : 'bg-[#1E293B]/70 hover:bg-[#1E293B] text-slate-300 hover:text-white border-slate-700/80 hover:border-slate-600'
                 }`}
-                title="हाम्रो बारेमा (About Platform Story)"
+                title={tText('हाम्रो बारेमा (About Platform Story)', 'About Us (Platform Story)')}
               >
                 <Info className="w-3.5 h-3.5 text-sky-400" />
-                <span>हाम्रो बारेमा</span>
+                <span>{tText('हाम्रो बारेमा', 'About Us')}</span>
               </button>
 
               {/* Streak Badge - Minimalist Sober Style */}
               <div 
                 className="hidden xs:flex items-center gap-1 bg-[#1E293B] border border-slate-700/80 text-amber-300 px-2.5 py-1 rounded-xl text-xs font-bold shrink-0"
-                title={`${user.streak} Days Continuous Study Streak`}
+                title={language === 'en' ? `${user.streak} Days Continuous Study Streak` : `${user.streak} दिने निरन्तर अध्ययन Streak`}
               >
                 <Flame className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 <span>{user.streak}d</span>
@@ -422,10 +423,10 @@ export const Header: React.FC = () => {
                       ? 'bg-sky-500/15 text-sky-300 border-sky-400 hover:bg-sky-500/25'
                       : 'bg-[#1E293B] text-slate-300 border-slate-700 hover:border-sky-500/40 hover:text-white'
                   }`}
-                  title={`प्रशासक प्यानल (${OFFICIAL_ADMIN_EMAIL})`}
+                  title={tText(`प्रशासक प्यानल (${OFFICIAL_ADMIN_EMAIL})`, `Admin Panel (${OFFICIAL_ADMIN_EMAIL})`)}
                 >
                   <ShieldCheck className="w-4 h-4 text-sky-400" />
-                  <span>प्रशासक (PIN)</span>
+                  <span>{tText('प्रशासक (PIN)', 'Admin (PIN)')}</span>
                 </button>
               )}
 
@@ -437,16 +438,16 @@ export const Header: React.FC = () => {
                     onClick={() => openLoginModal()}
                     id="header-login-btn"
                     className="min-h-[38px] px-3.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 active:scale-95 text-white text-xs font-black shadow-xs flex items-center gap-1.5 transition cursor-pointer shrink-0"
-                    title="Google वा इमेलबाट लगइन गर्नुहोस्"
+                    title={tText('Google वा इमेलबाट लगइन गर्नुहोस्', 'Login with Google or Email')}
                   >
                     <UserIcon className="w-3.5 h-3.5" />
-                    <span>लगइन</span>
+                    <span>{tText('लगइन', 'Login')}</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsProfileModalOpen(true)}
                     className="hidden sm:block p-1 rounded-xl hover:bg-[#1E293B] transition cursor-pointer shrink-0"
-                    title="अतिथि प्रोफाइल हेर्नुहोस्"
+                    title={tText('अतिथि प्रोफाइल हेर्नुहोस्', 'View Guest Profile')}
                   >
                     <img 
                       src={photoURL} 
@@ -462,7 +463,7 @@ export const Header: React.FC = () => {
                   onClick={() => setIsProfileModalOpen(true)}
                   id="header-profile-btn"
                   className="min-h-[44px] flex items-center gap-2 p-1 rounded-xl hover:bg-[#1E293B] transition-colors border-l pl-2 sm:pl-3 ml-0.5 sm:ml-1 border-slate-800 group text-left cursor-pointer active:scale-95"
-                  title={`${displayName} - प्रोफाइल सम्पादन`}
+                  title={`${displayName} - ${tText('प्रोफाइल सम्पादन', 'Edit Profile')}`}
                 >
                   <div className="text-right hidden sm:block max-w-[140px]">
                     <div className="flex items-center justify-end gap-1.5">
@@ -476,8 +477,8 @@ export const Header: React.FC = () => {
                         </span>
                       )}
                     </div>
-                    <p className="text-[10px] font-mono text-slate-400 truncate" title={userEmail || 'विद्यार्थी'}>
-                      {userEmail || user?.targetExam?.split(' ')[0] || 'विद्यार्थी'}
+                    <p className="text-[10px] font-mono text-slate-400 truncate" title={userEmail || tText('विद्यार्थी', 'Student')}>
+                      {userEmail || user?.targetExam?.split(' ')[0] || tText('विद्यार्थी', 'Student')}
                     </p>
                   </div>
                   
@@ -548,7 +549,7 @@ export const Header: React.FC = () => {
                     {displayName}
                   </h4>
                   <p className="text-[11px] text-slate-400 font-mono truncate">
-                    {userEmail || 'विद्यार्थी खाता'}
+                    {userEmail || tText('विद्यार्थी खाता', 'Student Account')}
                   </p>
                   <div className="flex items-center gap-1.5 mt-1">
                     {isPro ? (
@@ -581,7 +582,7 @@ export const Header: React.FC = () => {
                   className="w-full mt-3 py-2 px-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer"
                 >
                   <UserIcon className="w-3.5 h-3.5" />
-                  <span>लगइन / खाता खोल्नुहोस्</span>
+                  <span>{tText('लगइन / खाता खोल्नुहोस्', 'Login / Register')}</span>
                 </button>
               ) : (
                 <button
@@ -593,7 +594,7 @@ export const Header: React.FC = () => {
                   className="w-full mt-3 py-1.5 px-3 rounded-xl bg-[#0F172A] border border-slate-700 hover:border-sky-500/50 text-xs font-bold text-[#E2E8F0] flex items-center justify-center gap-1.5 transition"
                 >
                   <Edit3 className="w-3.5 h-3.5 text-sky-400" />
-                  <span>प्रोफाइल सम्पादन गर्नुहोस्</span>
+                  <span>{tText('प्रोफाइल सम्पादन गर्नुहोस्', 'Edit Profile')}</span>
                 </button>
               )}
             </div>
@@ -628,13 +629,13 @@ export const Header: React.FC = () => {
                         >
                           <div className="flex items-center gap-3 min-w-0 pr-1">
                             <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-sky-400' : 'text-slate-400'}`} />
-                            <span className="truncate">१. संगठित संस्था एकीकृत प्रिटेस्ट</span>
+                            <span className="truncate">{tText('१. संगठित संस्था एकीकृत प्रिटेस्ट', '1. Public Enterprises Pre-Test')}</span>
                           </div>
 
                           <div className="flex items-center gap-1.5 shrink-0">
                             <span
                               role="button"
-                              aria-label="टगल गर्नुहोस्"
+                              aria-label={tText('टगल गर्नुहोस्', 'Toggle')}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setIsMobileSangathitOpen(!isMobileSangathitOpen);
@@ -671,7 +672,7 @@ export const Header: React.FC = () => {
                           <div className="flex items-center gap-2 min-w-0">
                             <Building2 className="w-3.5 h-3.5 shrink-0 text-sky-400" />
                             <div className="text-left truncate">
-                              <p className="truncate font-semibold">१. संगठित संस्था Pre-Test (५० सेट)</p>
+                              <p className="truncate font-semibold">{tText('१. संगठित संस्था Pre-Test (५० सेट)', '1. Public Enterprises Pre-Test (50 Sets)')}</p>
                             </div>
                           </div>
                         </button>
@@ -693,7 +694,7 @@ export const Header: React.FC = () => {
                           <div className="flex items-center gap-2 min-w-0">
                             <Landmark className="w-3.5 h-3.5 shrink-0 text-sky-400" />
                             <div className="text-left truncate">
-                              <p className="truncate font-semibold">२. बैंकिङ्ग सेवा (NRB, RBB, NBL, ADBL)</p>
+                              <p className="truncate font-semibold">{tText('२. बैंकिङ्ग सेवा (NRB, RBB, NBL, ADBL)', '2. Banking Service (NRB, RBB, NBL, ADBL)')}</p>
                             </div>
                           </div>
                         </button>
@@ -715,7 +716,7 @@ export const Header: React.FC = () => {
                           <div className="flex items-center gap-2 min-w-0">
                             <Scale className="w-3.5 h-3.5 shrink-0 text-sky-400" />
                             <div className="text-left truncate">
-                              <p className="truncate font-semibold">३. निजामती/लोकसेवा तयारी</p>
+                              <p className="truncate font-semibold">{tText('३. निजामती/लोकसेवा तयारी', '3. Civil Service / PSC Preparation')}</p>
                             </div>
                           </div>
                         </button>
@@ -760,7 +761,7 @@ export const Header: React.FC = () => {
                   className="w-full flex items-center gap-3 p-3 rounded-xl text-xs font-bold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition mt-2 border border-red-200 dark:border-red-900/50"
                 >
                   <ShieldCheck className="w-4 h-4 text-red-600" />
-                  <span>प्रशासक प्यानल (Admin PIN)</span>
+                  <span>{tText('प्रशासक प्यानल (Admin PIN)', 'Admin Panel (PIN)')}</span>
                 </button>
               )}
             </div>
@@ -769,7 +770,7 @@ export const Header: React.FC = () => {
             <div className="p-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-2">
               <div className="flex items-center justify-between px-2 py-1">
                 <span className="text-xs font-bold text-slate-600 dark:text-slate-400">
-                  {language === 'ne' ? 'भाषा (Language)' : 'Language (भाषा)'}
+                  {tText('भाषा (Language)', 'Language')}
                 </span>
                 <div className="flex items-center p-0.5 rounded-lg bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">
                   <button
@@ -795,7 +796,7 @@ export const Header: React.FC = () => {
 
               <div className="flex items-center justify-between px-2 py-1">
                 <span className="text-xs font-bold text-slate-600 dark:text-slate-400">
-                  {language === 'ne' ? 'डार्क मोड (Dark Mode)' : 'Dark Mode (रातको मोड)'}
+                  {tText('डार्क मोड (Dark Mode)', 'Dark Mode')}
                 </span>
                 <button
                   type="button"
@@ -812,7 +813,7 @@ export const Header: React.FC = () => {
                 className="w-full py-2.5 px-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-600 dark:text-rose-400 font-bold text-xs flex items-center justify-center gap-2 transition"
               >
                 <LogOut className="w-4 h-4" />
-                <span>खाता लगआउट गर्नुहोस्</span>
+                <span>{tText('खाता लगआउट गर्नुहोस्', 'Log Out')}</span>
               </button>
             </div>
 

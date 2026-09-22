@@ -113,6 +113,10 @@ export const LEVEL_DEFINITIONS = [
   }
 ];
 
+export const formatBilingual = (neText: string, enText: string, lang: AppLanguage): string => {
+  return lang === 'en' ? (enText || neText) : (neText || enText);
+};
+
 export const TRANSLATIONS = {
   ne: {
     // Header & Navigation
@@ -133,6 +137,23 @@ export const TRANSLATIONS = {
     searchPlaceholder: 'के खोज्दै हुनुहुन्छ? (खोज्नुहोस् पाठ्यक्रम, ऐन, MCQs...)',
     toggleLang: 'English',
     activeLangBadge: 'नेपाली',
+    aiAssistant: 'AI साथी',
+    adminPin: 'प्रशासक (PIN)',
+    notifications: 'सूचनाहरू',
+    unreadCount: 'नपढिएका',
+    installApp: 'एप इन्स्टल',
+
+    // Sidebar
+    prepSequence: 'तयारी क्रम (१ देखि ४)',
+    stepsCount: '४ चरण',
+    viewAllSyllabus: 'सबै पाठ्यक्रम हेर्नुहोस्',
+    studyResources: 'अध्ययन स्रोत तथा औजारहरू',
+    flashcards: 'स्मार्ट फ्ल्यासकार्ड',
+    deepResearch: 'Deep Research AI (रिसर्च)',
+    myPurchases: 'मेरो खरिद',
+    bookmarks: 'बुकमार्क',
+    guestUser: 'अतिथि',
+    candidate: 'परीक्षार्थी',
 
     // Primary Categories
     categoriesTitle: 'प्रमुख परीक्षा क्षेत्रहरू (Primary Categories)',
@@ -189,6 +210,79 @@ export const TRANSLATIONS = {
     markCompleted: 'पूरा भयो',
     markIncomplete: 'अपूर्ण',
 
+    // Profile Banner
+    greetingPrefix: 'नमस्ते',
+    studyStreakSuffix: 'दिने निरन्तर अध्ययन Streak',
+    liveSyncBadge: '७७ जिल्ला लाइभ सिंक',
+    tierSpecial: 'तह ४ र ५ विशेष',
+    changePhoto: 'फोटो परिवर्तन गर्नुहोस्',
+    proMember: 'PRO सदस्य',
+    upgradePro: 'PRO बन्नुहोस्',
+    todayChallengeBtn: 'आजको परीक्षा हल गर्नुहोस् (+५० XP)',
+    studyNotesBtn: 'दैनिक अध्ययन नोट्स',
+    levelLabel: 'स्तर',
+    xpNeededPrefix: 'स्तर',
+    xpNeededSuffix: 'पुग्न थप',
+    xpNeededEnd: 'XP आवश्यक',
+
+    // Exam Roadmap
+    roadmapTitle: 'पाठ्यक्रम मार्गचित्र',
+    roadmapSubtitle: 'सम्पूर्ण पाठ्यक्रमलाई ५ चरणमा विभाजन गरिएको अन्तरक्रियात्मक मार्गचित्र।',
+    stepperBadge: '५-चरण ढाँचा',
+    stepsCleared: 'सम्पन्न चरणहरू',
+    stepsOfTotal: 'चरण पूरा',
+    topicCoverage: 'पाठ्यक्रम विषय कभरेज',
+    readiness: 'तयारी तत्परता',
+    stepActive: 'सक्रिय',
+    markStepDone: 'यो चरण पूर्ण भयो चिन्ह लगाउनुहोस्',
+    reopenStep: 'फेरि अध्ययन गर्नुहोस्',
+    phaseObjective: 'यस चरणको मुख्य परीक्षा लक्ष्य:',
+    checklistTitle: 'अध्ययन विषय सूची (Checklist):',
+    completedLabel: 'सम्पन्न',
+    pendingLabel: 'बाँकी',
+    practiceStepQuiz: 'यस चरणको क्विज अभ्यास गर्नुहोस्',
+    notesShort: 'नोट्स',
+    prevStep: 'अघिल्लो चरण',
+    nextStep: 'पछिल्लो चरण',
+
+    // Daily Quiz Card
+    dailyQuizTitle: 'दैनिक परीक्षा (Daily Quiz)',
+    dailyQuizSub: '२५ अनियमित प्रश्नहरू (Random MCQs) • तत्काल स्कोर सारांश',
+    dailyQuizDesc: '५,०००+ प्रश्न भण्डारबाट दैनिक मिश्रित २५ प्रश्नहरू हल गरी आफ्नो समय र शुद्धता परीक्षण गर्नुहोस्।',
+    startDailyQuizBtn: '२५ प्रश्न दैनिक परीक्षा सुरु गर्नुहोस्',
+    quickStats: 'स्कोर विश्लेषण',
+    passMarkLabel: 'उत्तीर्णाङ्क: ४०% (१०/२५)',
+    timerBadge: '२५ मिनेट टाइमर',
+
+    // Pomodoro Timer
+    pomodoroTitle: 'पोमोडोरो अध्ययन टाइमर (Study Focus Timer)',
+    pomodoroSub: 'एकाग्रता र विश्रामको वैज्ञानिक अध्ययन चक्र (२५ मिनेट ध्यान + ५ मिनेट विश्राम)',
+    focusSession: 'अध्ययन सत्र (Focus)',
+    shortBreak: 'छोटो विश्राम (Short Break)',
+    longBreak: 'लामो विश्राम (Long Break)',
+    startTimer: 'सुरु गर्नुहोस्',
+    pauseTimer: 'रोक्नुहोस्',
+    resetTimer: 'रिसेट',
+    sessionsCompleted: 'पूरा भएका सत्रहरू',
+
+    // Flashcards Card
+    flashcardTitle: 'स्मार्ट फ्ल्यासकार्ड स्मरण (Flashcard Memorizer)',
+    flashcardSub: 'प्रमुख कानुनी ऐनहरू र बैंकिङ अवधारणाहरू स्मरण गर्नुहोस्',
+    flipPrompt: 'कार्ड पल्टाउन क्लिक वा स्पेस थिच्नुहोस्',
+    dontKnowBtn: 'फेरि दोहोर्याउने (Don\'t Know)',
+    knowBtn: 'मलाई आउँछ (Know)',
+    viewAllFlashcards: 'सबै फ्ल्यासकार्ड हेर्नुहोस्',
+    masteredBadge: 'कण्ठस्त',
+    reviewBadge: 'दोहोर्याउने',
+
+    // Master Sequence
+    sequenceTitle: 'तयारीको निश्चित अनुक्रम (Master Preparation Sequence)',
+    sequenceSub: '१ देखि ४ सम्मको एकीकृत पूर्व-तयारी र लिखित परीक्षा संरचना',
+    seq1Title: 'RBB / NBL / ADBL वस्तुगत ५० सेट',
+    seq2Title: 'वाणिज्य बैंक तह ४ र ५ लिखित परीक्षा',
+    seq3Title: 'संस्थान ५० सेट (NTC, NEA, CIT, EPF)',
+    seq4Title: 'लोकसेवा आयोग (अधिकृत, नासु, खरिदार) लिखित',
+
     // Admin & Alerts
     adminOnlyPdf: 'A4 PDF निर्यात केवल आधिकारिक व्यवस्थापकका लागि मात्र सुरक्षित छ।',
     openDashboard: 'विस्तृत ड्यासबोर्ड खोल्नुहोस्',
@@ -215,6 +309,23 @@ export const TRANSLATIONS = {
     searchPlaceholder: 'Search syllabus, banking acts, 10k+ MCQs...',
     toggleLang: 'नेपाली',
     activeLangBadge: 'English',
+    aiAssistant: 'AI Study',
+    adminPin: 'Admin (PIN)',
+    notifications: 'Notifications',
+    unreadCount: 'unread',
+    installApp: 'Install App',
+
+    // Sidebar
+    prepSequence: 'Preparation Sequence (1 to 4)',
+    stepsCount: '4 Steps',
+    viewAllSyllabus: 'View All Syllabus',
+    studyResources: 'Study Resources & Tools',
+    flashcards: 'Smart Flashcards',
+    deepResearch: 'Deep Research AI',
+    myPurchases: 'My Purchases',
+    bookmarks: 'Bookmarks',
+    guestUser: 'Guest User',
+    candidate: 'Candidate',
 
     // Primary Categories
     categoriesTitle: 'Primary Examination Categories',
@@ -270,6 +381,79 @@ export const TRANSLATIONS = {
     overallProgress: 'Overall Completion',
     markCompleted: 'Completed',
     markIncomplete: 'Incomplete',
+
+    // Profile Banner
+    greetingPrefix: 'Hello',
+    studyStreakSuffix: '-Day Continuous Study Streak',
+    liveSyncBadge: '77 Districts Live Sync',
+    tierSpecial: 'Level 4 & 5 Special',
+    changePhoto: 'Change Photo',
+    proMember: 'PRO MEMBER',
+    upgradePro: 'Become PRO',
+    todayChallengeBtn: 'Start Today\'s Challenge (+50 XP)',
+    studyNotesBtn: 'Daily Study Notes',
+    levelLabel: 'Level',
+    xpNeededPrefix: 'Level',
+    xpNeededSuffix: 'requires',
+    xpNeededEnd: 'more XP',
+
+    // Exam Roadmap
+    roadmapTitle: 'Exam Syllabus Roadmap',
+    roadmapSubtitle: 'Interactive 5-phase syllabus coverage roadmap aligned with official PSC curricula.',
+    stepperBadge: '5-Step Stepper',
+    stepsCleared: 'Cleared Milestones',
+    stepsOfTotal: 'Steps Done',
+    topicCoverage: 'Syllabus Topic Coverage',
+    readiness: 'Exam Readiness',
+    stepActive: 'Active',
+    markStepDone: 'Mark Milestone Complete',
+    reopenStep: 'Reopen for Revision',
+    phaseObjective: 'Core Examination Focus (Objective):',
+    checklistTitle: 'Syllabus Checklist:',
+    completedLabel: 'Done',
+    pendingLabel: 'Pending',
+    practiceStepQuiz: 'Practice Phase Quiz',
+    notesShort: 'Notes',
+    prevStep: 'Previous Step',
+    nextStep: 'Next Step',
+
+    // Daily Quiz Card
+    dailyQuizTitle: 'Daily Exam Quiz',
+    dailyQuizSub: '25 Random MCQs • Instant Score Analytics',
+    dailyQuizDesc: 'Practice 25 high-yield MCQs drawn from 5,000+ repository to test your speed and accuracy.',
+    startDailyQuizBtn: 'Start 25 MCQ Daily Exam',
+    quickStats: 'Score Analytics',
+    passMarkLabel: 'Pass Marks: 40% (10/25)',
+    timerBadge: '25-Min Timer',
+
+    // Pomodoro Timer
+    pomodoroTitle: 'Pomodoro Study Timer',
+    pomodoroSub: 'Scientifically proven focus cycles (25 min study + 5 min break)',
+    focusSession: 'Focus Session',
+    shortBreak: 'Short Break',
+    longBreak: 'Long Break',
+    startTimer: 'Start',
+    pauseTimer: 'Pause',
+    resetTimer: 'Reset',
+    sessionsCompleted: 'Sessions Cleared',
+
+    // Flashcards Card
+    flashcardTitle: 'Smart Flashcard Memorizer',
+    flashcardSub: 'Memorize key banking acts, definitions and regulations',
+    flipPrompt: 'Tap card or press Space to flip',
+    dontKnowBtn: 'Review Again (Don\'t Know)',
+    knowBtn: 'Mastered (Know)',
+    viewAllFlashcards: 'View All Flashcards',
+    masteredBadge: 'Mastered',
+    reviewBadge: 'Review',
+
+    // Master Sequence
+    sequenceTitle: 'Master Preparation Sequence',
+    sequenceSub: 'Numbered 1 to 4 integrated Pre-test & Written examination structure',
+    seq1Title: 'RBB / NBL / ADBL Objective 50 Sets',
+    seq2Title: 'Commercial Banks Level 4 & 5 Written Exam',
+    seq3Title: 'Enterprises 50 Sets (NTC, NEA, CIT, EPF)',
+    seq4Title: 'Civil Service (Officer, NaSu, Kharidar) Written',
 
     // Admin & Alerts
     adminOnlyPdf: 'Official A4 PDF export is strictly reserved for verified administrators.',

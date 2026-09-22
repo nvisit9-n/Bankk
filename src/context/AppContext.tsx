@@ -27,6 +27,7 @@ interface AppContextType {
   setLanguage: (lang: AppLanguage) => void;
   toggleLanguage: () => void;
   t: typeof TRANSLATIONS.ne;
+  tText: (neText: string, enText: string) => string;
   isLevelDashboardOpen: boolean;
   setIsLevelDashboardOpen: (open: boolean) => void;
   levelDashboardConfig: { categoryId: string; level: '4' | '5' | '6'; activeTab?: number } | null;
@@ -203,6 +204,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode; initialUser?: Us
   }, []);
 
   const t = TRANSLATIONS[language];
+  const tText = useCallback((neText: string, enText: string): string => {
+    return language === 'en' ? (enText || neText) : (neText || enText);
+  }, [language]);
 
   // Level Dashboard Modal State
   const [isLevelDashboardOpen, setIsLevelDashboardOpen] = useState(false);
@@ -950,6 +954,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode; initialUser?: Us
         setLanguage,
         toggleLanguage,
         t,
+        tText,
         isLevelDashboardOpen,
         setIsLevelDashboardOpen,
         levelDashboardConfig,
