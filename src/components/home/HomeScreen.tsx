@@ -43,6 +43,7 @@ import { QuickAccess } from '../QuickAccess';
 import { OfficialYouTubeSection } from './OfficialYouTubeSection';
 import { LevelSelectorCard } from '../levels/LevelSelectorCard';
 import { MasterSequenceDashboard } from './MasterSequenceDashboard';
+import { CategoryProgressTracker } from './CategoryProgressTracker';
 
 export const HomeScreen: React.FC = () => {
   const { 
@@ -163,6 +164,9 @@ export const HomeScreen: React.FC = () => {
         onStartChallenge={handleStartTodayChallenge}
         onOpenNotes={() => setActiveTab('free-notes')}
       />
+
+      {/* Visual Progress Tracker across Banking, Loksewa, NRB */}
+      <CategoryProgressTracker />
 
       {/* STRICT NUMBERED SEQUENCE 1 TO 4 (INTEGRATED PRETEST & WRITTEN PREPARATION) */}
       <MasterSequenceDashboard />
