@@ -219,7 +219,7 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
             <h3 className="text-xs sm:text-sm font-black text-slate-900 dark:text-white flex items-center gap-1.5">
               <span>उत्तरपुस्तिका विस्तृत मूल्याङ्कन प्रतिवेदन</span>
             </h3>
-            <p className="text-[10px] text-slate-600 dark:text-slate-300 font-medium">
+            <p className="text-[10px] text-slate-600 dark:text-[#FFFFFF] font-medium">
               लोकसेवा तथा बैंकिङ परीक्षा मानक (Word Rank Engine • {data.sheetCount || sheetCount} पाना जाँच)
             </p>
           </div>
@@ -238,7 +238,7 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
             <span className="text-3xl sm:text-4xl font-black text-amber-600 dark:text-[#FBBF24] tracking-tight">
               {score}
             </span>
-            <span className="text-sm sm:text-base font-bold text-slate-700 dark:text-slate-200">
+            <span className="text-sm sm:text-base font-bold text-slate-700 dark:text-[#FFFFFF]">
               / {maxScore} अङ्क
             </span>
             <span className="ml-2 text-xs font-bold px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 text-slate-800 dark:text-[#FFFFFF] border border-slate-300 dark:border-slate-700 shadow-xs">
@@ -358,13 +358,13 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
       )}
 
       {/* Footer Toolbar: PDF Export, Voice TTS, Copy */}
-      <div className="px-4 py-2.5 bg-slate-50 dark:bg-slate-850 flex items-center justify-between text-xs text-slate-600 dark:text-slate-300 flex-wrap gap-2">
+      <div className="px-4 py-2.5 bg-slate-50 dark:bg-slate-850 flex items-center justify-between text-xs text-slate-600 dark:text-[#FFFFFF] flex-wrap gap-2">
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={handleTts}
             className={`flex items-center gap-1 font-bold transition cursor-pointer ${
-              isPlayingTts ? 'text-rose-600 dark:text-rose-400 animate-pulse' : 'hover:text-amber-600 dark:hover:text-amber-400 text-slate-700 dark:text-slate-200'
+              isPlayingTts ? 'text-rose-600 dark:text-rose-400 animate-pulse' : 'hover:text-amber-600 dark:hover:text-amber-400 text-slate-700 dark:text-[#FFFFFF]'
             }`}
             title="नेपालीमा आवाज सुन्नुहोस्"
           >
@@ -375,7 +375,7 @@ export const EvaluationCard: React.FC<EvaluationCardProps> = ({
           <button
             type="button"
             onClick={handleCopy}
-            className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-white transition cursor-pointer text-slate-700 dark:text-slate-200 font-medium"
+            className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-white transition cursor-pointer text-slate-700 dark:text-[#FFFFFF] font-medium"
             title="मूल्याङ्कन कपी गर्नुहोस्"
           >
             {isCopied ? <Check className="w-3.5 h-3.5 text-[#4ADE80]" /> : <Copy className="w-3.5 h-3.5" />}

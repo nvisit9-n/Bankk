@@ -46,7 +46,7 @@ import {
 } from '../../services/geminiClientService';
 import { FirebaseAuthService } from '../../services/firebaseAuthService';
 import { EvaluationCard } from '../ai/EvaluationCard';
-import { cleanNepaliSpeechTranscript, appendSpeechTranscriptSafely } from '../../utils/speechUtils';
+import { cleanNepaliSpeechTranscript, appendSpeechTranscriptSafely, combineSpeechChunksSafely } from '../../utils/speechUtils';
 
 interface AttachedFile {
   type: 'image' | 'pdf';
@@ -327,8 +327,7 @@ export const AiAssistantModal: React.FC = () => {
               interimChunk = transcript;
             }
           }
-          const rawAccumulated = (finalChunk + interimChunk).trim();
-          const cleanAccumulated = cleanNepaliSpeechTranscript(rawAccumulated);
+          const cleanAccumulated = combineSpeechChunksSafely(finalChunk, interimChunk);
           speechBufferRef.current = cleanAccumulated;
           setInterimSpeechBuffer(cleanAccumulated);
           setSpeechNotice(`🔴 सुन्दैछ: "${cleanAccumulated}"`);
@@ -1110,7 +1109,7 @@ export const AiAssistantModal: React.FC = () => {
                           </div>
                         )
                       ) : (
-                        <div className="whitespace-pre-line text-slate-100">
+                        <div className="whitespace-pre-line text-[#FFFFFF] font-medium leading-relaxed">
                           {msg.text}
                         </div>
                       )}
@@ -1130,7 +1129,7 @@ export const AiAssistantModal: React.FC = () => {
 
                       {/* AI Message Footer Toolbar with Nepali Voice (TTS), Copy, PDF */}
                       {msg.sender === 'ai' && msg.text && !msg.isError && !isAnswerSheetEvaluation && (
-                        <div className="pt-2.5 sm:pt-3 mt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-300 gap-2 flex-wrap">
+                        <div className="pt-2.5 sm:pt-3 mt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-600 dark:text-[#FFFFFF] gap-2 flex-wrap">
                           <div className="flex items-center gap-3">
                             <button
                               onClick={() => handleToggleTts(msg.id, msg.text)}

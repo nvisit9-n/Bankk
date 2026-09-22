@@ -377,7 +377,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
                     Loksewa & Banking Visuals
                   </span>
                 </div>
-                <pre {...props} className={`p-4 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed whitespace-pre scrollbar-thin text-[#F1F5F9] ${props.className || ''}`}>
+                <pre {...props} className={`p-4 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed whitespace-pre scrollbar-thin text-[#FFFFFF] ${props.className || ''}`}>
                   {children}
                 </pre>
               </div>

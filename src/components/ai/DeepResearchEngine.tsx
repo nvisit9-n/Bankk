@@ -25,7 +25,7 @@ import {
 import ReactMarkdown from 'react-markdown';
 import { MarkdownRenderer } from '../common/MarkdownRenderer';
 import { useApp } from '../../context/AppContext';
-import { cleanNepaliSpeechTranscript, appendSpeechTranscriptSafely } from '../../utils/speechUtils';
+import { cleanNepaliSpeechTranscript, appendSpeechTranscriptSafely, combineSpeechChunksSafely } from '../../utils/speechUtils';
 
 export interface UploadedSheetImage {
   id: string;
@@ -238,8 +238,7 @@ export const DeepResearchEngine: React.FC<DeepResearchEngineProps> = ({
             interimSegment = transcript;
           }
         }
-        const rawAccumulated = (finalSegment + interimSegment).trim();
-        const cleanAccumulated = cleanNepaliSpeechTranscript(rawAccumulated);
+        const cleanAccumulated = combineSpeechChunksSafely(finalSegment, interimSegment);
         speechBufferRef.current = cleanAccumulated;
         setInterimSpeechBuffer(cleanAccumulated);
       };
@@ -686,7 +685,7 @@ export const DeepResearchEngine: React.FC<DeepResearchEngineProps> = ({
           <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
             
             {/* Welcome Greeting Banner */}
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-sky-500/10 via-emerald-500/10 to-transparent border border-sky-500/20 text-slate-800 dark:text-slate-200">
+            <div className="p-4 rounded-2xl bg-gradient-to-r from-sky-500/10 via-emerald-500/10 to-transparent border border-sky-500/20 text-slate-800 dark:text-[#FFFFFF]">
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
                   <Bot className="w-5 h-5" />
@@ -695,7 +694,7 @@ export const DeepResearchEngine: React.FC<DeepResearchEngineProps> = ({
                   <h3 className="font-bold text-sm text-slate-900 dark:text-white">
                     {t.welcomeTitle}
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-[#FFFFFF] leading-relaxed">
                     {t.welcomeDesc}
                   </p>
                 </div>
@@ -797,7 +796,7 @@ export const DeepResearchEngine: React.FC<DeepResearchEngineProps> = ({
                           </button>
                         </div>
 
-                        <span className="text-[11px] font-bold text-slate-600 dark:text-slate-300">
+                        <span className="text-[11px] font-bold text-slate-600 dark:text-[#FFFFFF]">
                           {msg.mode === 'eval' ? 'Word Rank Evaluator' : 'BAFIA & Acts Engine'}
                         </span>
                       </div>
